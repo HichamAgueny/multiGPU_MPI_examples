@@ -14,19 +14,24 @@ The main directory contains five folders, each contains examples/exercises of MP
 
 Below is a brief overview of each example:
 
-### Example 1: Setting a GPU device and assigning each MPI rank to a GPU device
+#### Example 1: Setting a GPU device and assigning each MPI rank to a GPU device
 
-### Example 2: Combining traditional MPI combined with OpenACC/OpenMP
+#### Example 2: Combining traditional MPI combined with OpenACC/OpenMP
 
-### Example 3: GPU-aware MPI with OpenACC/OpenMP
+#### Example 3: GPU-aware MPI with OpenACC/OpenMP
 
-### Exercise: Implementing GPU-aware support in an application based on solving Laplace eq. 
+#### Exercise: Implementing GPU-aware support in an application based on solving Laplace eq. 
 
 ### Compiling and executing the code:
 
-To compile: "./compile.sh"
+Load the LUMI software stack
+```
+module load LUMI/24.03 partition/G
+module load cpeCray
+```
+Compile: ```./compile.sh```
 
-To submit a job: "sbatch script.slurm"
+Submit a job: ```sbatch script.slurm```
 
 ## How to Get Started
 
@@ -38,7 +43,11 @@ To submit a job: "sbatch script.slurm"
 
 2. Navigate to the folder for the example you want to start with e.g.:
     ```sh
-    cd example_1
+    For MPI-OpenACC
+    cd example_1/setDevice_acc
+
+    For MPI-OpenMP
+    cd example_1/setDevice_omp
     ```
 
 3. For the exercise, follow the instructions provided in the `README.txt` file within the exercise folder.
