@@ -99,28 +99,22 @@ nxmax = int(result_GB)
 
 !transfer the data to the neighbouring MPI-process
 !send f(:) from myid-1 to be stored in f(:) in myid+1
-         if(myid.lt.nproc-1) then
+         if(myid.eq.0) then
           call MPI_Send(f(:),nx,MPI_DOUBLE_PRECISION,myid+1,tag1,&
                        MPI_COMM_WORLD, ierr)
+!receive f(:) from myid-1
+          call MPI_Recv(f(:),nx,MPI_DOUBLE_PRECISION,myid+1,&
+                      tag2,MPI_COMM_WORLD, status,ierr)
          endif
 
 !receive f(:) from myid-1
-         if(myid.gt.0) then
+         if(myid.eq.1) then
           call MPI_Recv(f(:),nx,MPI_DOUBLE_PRECISION,myid-1, &
                       tag1,MPI_COMM_WORLD, status,ierr)
-         endif
-
 !send f(:) from myid+1 to be stored in f(:) in myid-1
-         if(myid.gt.0) then
           call MPI_Send(f(:),nx,MPI_DOUBLE_PRECISION,myid-1,tag2,&
                        MPI_COMM_WORLD, ierr)
          endif
-
-!receive f(:) from myid-1
-        if(myid.lt.nproc-1) then
-         call MPI_Recv(f(:),nx,MPI_DOUBLE_PRECISION,myid+1,&
-                      tag2,MPI_COMM_WORLD, status,ierr)
-        endif
 
 !update data: copy data from CPU to GPU        
 !$acc update device(f)
