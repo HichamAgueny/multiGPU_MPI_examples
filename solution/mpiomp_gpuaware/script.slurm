@@ -17,9 +17,6 @@ module load cpeCray
 #To enable GPU-aware MPI
 export MPICH_GPU_SUPPORT_ENABLED=1
 
-#To enable GPUDirect RDMA
-export MPICH_RDMA_ENABLED_CUDA=1
-
 # Binding option
 CPU_BIND="map_cpu:49,57,17,25,1,9,33,41"
 
